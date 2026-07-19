@@ -51,8 +51,8 @@ async function apiRequest(endpoint, options = {}) {
 
 export async function checkBackendHealth() {
   try {
-    const data = await apiRequest("/", { timeout: 5000 });
-    return data && data.status === "healthy";
+    const res = await fetch(`${BASE_URL}/health`);
+    return res.ok;
   } catch (e) {
     console.error("Backend health check failed:", e);
     return false;

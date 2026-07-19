@@ -34,19 +34,23 @@ except (json.JSONDecodeError, ValueError):
     # Fallback: assume comma-separated values if JSON decoding fails
     origins = [origin.strip() for origin in cors_origins_str.split(",") if origin.strip()]
 
+# Remove wildcard from allow_origins if credentials are True to avoid Starlette crash on startup
+if "*" in origins:
+    origins = [origin for origin in origins if origin != "*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app|https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 @app.get("/")
-async def root():
-    """Health check endpoint."""
-    return {
-        "status": "healthy",
-        "app": "Shuruaat AI Listing Agent Backend",
-        "version": "1.0.0"
-    }
+def root():
+    return {"status": "ok"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
