@@ -1,1 +1,0 @@
-import{c as e,p as t}from"./appStore-B5bomfA8.js";var n=t(e(),1),r=n.createContext(null);function i(e){return n.useContext(r)}export{r as n,i as t};
