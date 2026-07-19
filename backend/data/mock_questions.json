@@ -1,0 +1,30 @@
+[
+  {"id": "q1", "listing_id": "listing_kurti_01", "question": "Does this come in size XL?", "language": "en", "timestamp": "2026-07-10T10:00:00"},
+  {"id": "q2", "listing_id": "listing_kurti_01", "question": "kya ye size XL mein available hai?", "language": "hi", "timestamp": "2026-07-10T10:15:00"},
+  {"id": "q3", "listing_id": "listing_kurti_01", "question": "Is there a size chart? What is size L bust measurement?", "language": "en", "timestamp": "2026-07-10T11:00:00"},
+  {"id": "q4", "listing_id": "listing_kurti_01", "question": "Is the color exactly as shown in the picture?", "language": "en", "timestamp": "2026-07-11T09:00:00"},
+  
+  {"id": "q5", "listing_id": "listing_saree_01", "question": "What is the fabric material of this saree?", "language": "en", "timestamp": "2026-07-10T12:00:00"},
+  {"id": "q6", "listing_id": "listing_saree_01", "question": "fabric pure silk hai ya blend?", "language": "hi", "timestamp": "2026-07-10T12:30:00"},
+  {"id": "q7", "listing_id": "listing_saree_01", "question": "silk material quality kaisa hai?", "language": "hi", "timestamp": "2026-07-10T13:00:00"},
+  {"id": "q8", "listing_id": "listing_saree_01", "question": "Can I get this saree delivered in 2 days?", "language": "en", "timestamp": "2026-07-11T14:00:00"},
+  
+  {"id": "q9", "listing_id": "listing_footwear_01", "question": "Is the sole slip resistant?", "language": "en", "timestamp": "2026-07-10T14:00:00"},
+  {"id": "q10", "listing_id": "listing_footwear_01", "question": "cushioning walk ke liye soft hai na?", "language": "hi", "timestamp": "2026-07-10T14:45:00"},
+  {"id": "q11", "listing_id": "listing_footwear_01", "question": "indha sandal size 6 eppo varum?", "language": "ta", "timestamp": "2026-07-11T10:00:00"},
+  
+  {"id": "q12", "listing_id": "listing_jewelry_01", "question": "Does the gold plating fade quickly?", "language": "en", "timestamp": "2026-07-10T15:00:00"},
+  {"id": "q13", "listing_id": "listing_jewelry_01", "question": "kya is neckpiece ke saath earring bhi hai?", "language": "hi", "timestamp": "2026-07-10T15:20:00"},
+  {"id": "q14", "listing_id": "listing_jewelry_01", "question": "plating maintain panna chemical use pannalaama?", "language": "ta", "timestamp": "2026-07-11T11:00:00"},
+  
+  {"id": "q15", "listing_id": "listing_decor_01", "question": "What is the height of the vase?", "language": "en", "timestamp": "2026-07-10T16:00:00"},
+  {"id": "q16", "listing_id": "listing_decor_01", "question": "is decoration item ki cleaning kaise karni hai?", "language": "hi", "timestamp": "2026-07-10T16:10:00"},
+  {"id": "q17", "listing_id": "listing_decor_01", "question": "vase ceramic breakable aaga irukuma?", "language": "ta", "timestamp": "2026-07-11T12:00:00"},
+  
+  {"id": "q18", "listing_id": "listing_kurti_02", "question": "Does this kurti bleed color on first wash?", "language": "en", "timestamp": "2026-07-12T10:00:00"},
+  {"id": "q19", "listing_id": "listing_kurti_02", "question": "is price pe pure cotton milega kya?", "language": "hi", "timestamp": "2026-07-12T11:00:00"},
+  
+  {"id": "q20", "listing_id": "listing_saree_02", "question": "Is the zari border made of silver threads?", "language": "en", "timestamp": "2026-07-12T12:00:00"},
+  {"id": "q21", "listing_id": "listing_saree_02", "question": "saree heavy weight ah irukuma?", "language": "ta", "timestamp": "2026-07-12T13:00:00"},
+  {"id": "q22", "listing_id": "listing_jewelry_02", "question": "Is the stone in the ring real diamond?", "language": "en", "timestamp": "2026-07-12T14:00:00"}
+]

@@ -1,0 +1,626 @@
+import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, Star, Truck, ShieldCheck, Pencil, Send, Wrench, Mic, ShieldAlert, ToggleLeft, ToggleRight } from "lucide-react";
+import { Card, PrimaryButton, GhostButton, Gauge } from "@/components/ui-bits";
+import { useTranslation } from "@/lib/language-context";
+import { useAppStore } from "@/store/appStore";
+import sareeFallback from "@/assets/product-saree.jpg";
+import { useEffect, useState, useRef } from "react";
+import { cn } from "@/lib/utils";
+function extractMaterial(listing) {
+  const text = `${listing.title || ""} ${listing.keywords?.join(" ") || ""} ${listing.bullets?.join(" ") || ""}`.toLowerCase();
+  if (text.includes("cotton") || text.includes("\u0938\u0942\u0924\u0940")) return "Cotton";
+  if (text.includes("silk") || text.includes("\u0930\u0947\u0936\u092E")) return "Silk";
+  if (text.includes("chiffon")) return "Chiffon";
+  if (text.includes("georgette")) return "Georgette";
+  if (text.includes("linen") || text.includes("\u0932\u093F\u0928\u0928")) return "Linen";
+  if (text.includes("wool") || text.includes("\u090A\u0928")) return "Wool";
+  if (text.includes("leather") || text.includes("\u091A\u092E\u0921\u093C\u093E")) return "Leather";
+  if (text.includes("metal") || text.includes("\u0927\u093E\u0924\u0941")) return "Metal";
+  if (text.includes("silver") || text.includes("\u091A\u093E\u0902\u0926\u0940")) return "Silver";
+  if (text.includes("gold") || text.includes("\u0938\u094B\u0928\u093E")) return "Gold";
+  return "";
+}
+function extractColour(listing) {
+  const text = `${listing.title || ""} ${listing.keywords?.join(" ") || ""} ${listing.bullets?.join(" ") || ""}`.toLowerCase();
+  if (text.includes("red") || text.includes("\u0932\u093E\u0932")) return "Red";
+  if (text.includes("blue") || text.includes("\u0928\u0940\u0932\u093E")) return "Blue";
+  if (text.includes("green") || text.includes("\u0939\u0930\u093E")) return "Green";
+  if (text.includes("yellow") || text.includes("\u092A\u0940\u0932\u093E")) return "Yellow";
+  if (text.includes("pink") || text.includes("\u0917\u0941\u0932\u093E\u092C\u0940")) return "Pink";
+  if (text.includes("black") || text.includes("\u0915\u093E\u0932\u093E")) return "Black";
+  if (text.includes("white") || text.includes("\u0938\u092B\u093C\u0947\u0926")) return "White";
+  if (text.includes("gold") || text.includes("\u0938\u0941\u0928\u0939\u0930\u093E")) return "Gold";
+  if (text.includes("orange") || text.includes("\u0928\u093E\u0930\u0902\u0917\u0940")) return "Orange";
+  if (text.includes("purple") || text.includes("\u092C\u0948\u0902\u0917\u0928\u0940")) return "Purple";
+  if (text.includes("indigo") || text.includes("\u0907\u0902\u0921\u093F\u0917\u094B")) return "Indigo";
+  return "";
+}
+function extractSleeve(listing) {
+  const text = `${listing.title || ""} ${listing.keywords?.join(" ") || ""} ${listing.bullets?.join(" ") || ""}`.toLowerCase();
+  if (text.includes("sleeveless") || text.includes("\u092C\u093F\u0928\u093E \u0906\u0938\u094D\u0924\u0940\u0928")) return "Sleeveless";
+  if (text.includes("short sleeve") || text.includes("\u091B\u094B\u091F\u0940 \u0906\u0938\u094D\u0924\u0940\u0928")) return "Short Sleeve";
+  if (text.includes("full sleeve") || text.includes("\u092A\u0942\u0930\u0940 \u0906\u0938\u094D\u0924\u0940\u0928") || text.includes("full-sleeve")) return "Full Sleeve";
+  if (text.includes("half sleeve") || text.includes("half-sleeve")) return "Half Sleeve";
+  if (text.includes("3/4 sleeve") || text.includes("three-quarter")) return "3/4 Sleeve";
+  return "";
+}
+function extractOccasion(listing) {
+  const text = `${listing.title || ""} ${listing.keywords?.join(" ") || ""} ${listing.bullets?.join(" ") || ""}`.toLowerCase();
+  if (text.includes("wedding") || text.includes("\u0936\u093E\u0926\u0940") || text.includes("bridal")) return "Wedding";
+  if (text.includes("festive") || text.includes("\u0924\u094D\u092F\u094C\u0939\u093E\u0930") || text.includes("festival")) return "Festive";
+  if (text.includes("party") || text.includes("\u092A\u093E\u0930\u094D\u091F\u0940")) return "Party Wear";
+  if (text.includes("casual") || text.includes("\u0915\u0948\u091C\u0941\u0905\u0932")) return "Casual";
+  if (text.includes("formal") || text.includes("\u0914\u092A\u091A\u093E\u0930\u093F\u0915")) return "Formal";
+  if (text.includes("daily") || text.includes("\u0930\u094B\u091C\u093E\u0928\u093E")) return "Daily Wear";
+  return "";
+}
+export function KantriMotifDivider({ className }) {
+  return <div className={cn("flex items-center justify-center my-4 opacity-30", className)} aria-hidden>
+      <svg width="100%" height="12" viewBox="0 0 100 12" preserveAspectRatio="none" className="text-primary fill-current">
+        <pattern id="kantri-pattern" width="10" height="12" patternUnits="userSpaceOnUse">
+          <polygon points="0,6 5,0 10,6 5,12" className="fill-primary" />
+          <circle cx="5" cy="6" r="1.5" className="fill-background" />
+        </pattern>
+        <rect width="100" height="12" fill="url(#kantri-pattern)" />
+      </svg>
+    </div>;
+}
+export default function PreviewPage() {
+  const { t, language } = useTranslation();
+  const navigate = useNavigate();
+  const currentListing = useAppStore((s) => s.currentListing);
+  const setCurrentListing = useAppStore((s) => s.setCurrentListing);
+  const resolveIssue = useAppStore((s) => s.resolveIssue);
+  const addPublishedListing = useAppStore((s) => s.addPublishedListing);
+  const setPublishedListing = useAppStore((s) => s.setPublishedListing);
+  useEffect(() => {
+    if (!currentListing?.final_listing) {
+      navigate("/listing");
+    }
+  }, [currentListing, navigate]);
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState(1499);
+  const [material, setMaterial] = useState("");
+  const [colour, setColour] = useState("");
+  const [sleeve, setSleeve] = useState("");
+  const [occasion, setOccasion] = useState("");
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [description, setDescription] = useState("");
+  const [detailsExpanded, setDetailsExpanded] = useState(true);
+  const [isRecordingDescription, setIsRecordingDescription] = useState(false);
+  const [enforcePrepaid, setEnforcePrepaid] = useState(true);
+  const recognitionRef = useRef(null);
+  const titleInputRef = useRef(null);
+  const [showPushDrawer, setShowPushDrawer] = useState(false);
+  const [selectedChannels, setSelectedChannels] = useState({
+    meesho: true,
+    amazon: false,
+    instagram: true,
+    whatsapp: true
+  });
+  const channels = [
+    { id: "meesho", label: "Meesho", icon: "\u{1F4E6}" },
+    { id: "amazon", label: "Amazon.in", icon: "\u{1F6D2}" },
+    { id: "instagram", label: "Instagram Shop", icon: "\u{1F4F8}" },
+    { id: "whatsapp", label: "WhatsApp Catalog", icon: "\u{1F4AC}" }
+  ];
+  function handleEditClick() {
+    setDetailsExpanded(true);
+    setTimeout(() => {
+      titleInputRef.current?.focus();
+      titleInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  }
+  useEffect(() => {
+    if (currentListing?.final_listing) {
+      const listingObj = currentListing.final_listing;
+      setProductName(listingObj.title || "");
+      setPrice(listingObj.price || 1499);
+      setMaterial(listingObj.material || listingObj.fabric || extractMaterial(listingObj));
+      setColour(listingObj.colour || listingObj.pattern || extractColour(listingObj));
+      setSleeve(listingObj.sleeve || extractSleeve(listingObj));
+      setOccasion(listingObj.occasion || extractOccasion(listingObj));
+      const initialSizes = listingObj.available_sizes || listingObj.sizes || (listingObj.size_chart ? Object.keys(listingObj.size_chart) : ["Free"]);
+      setSelectedSizes(initialSizes);
+      setDescription(listingObj.description || (listingObj.bullets ? listingObj.bullets.join("\n") : ""));
+    }
+  }, [currentListing]);
+  if (!currentListing?.final_listing) {
+    return null;
+  }
+  const riskScore = currentListing.risk_score ?? 0;
+  const readiness = Math.round(100 - riskScore);
+  const issues = currentListing.issues_found ?? [];
+  const imageSrc = currentListing.uploadedImageUrl || sareeFallback;
+  const isApparel = currentListing.declared_category === "kurti" || currentListing.declared_category === "saree" || currentListing.declared_category === "tshirt" || currentListing.declared_category === "pants" || currentListing.declared_category === "dress";
+  function updateListingField(key, value) {
+    if (!currentListing) return;
+    setCurrentListing({
+      ...currentListing,
+      final_listing: {
+        ...currentListing.final_listing,
+        [key]: value
+      }
+    });
+  }
+  function handleFixIssue(index) {
+    resolveIssue(index);
+  }
+  function toggleSizeSelection(sz) {
+    let next;
+    if (selectedSizes.includes(sz)) {
+      next = selectedSizes.filter((s) => s !== sz);
+    } else {
+      next = [...selectedSizes, sz];
+    }
+    setSelectedSizes(next);
+    updateListingField("sizes", next);
+    const newChart = {};
+    next.forEach((s) => {
+      newChart[s] = currentListing?.final_listing?.size_chart?.[s] || "Standard Fit";
+    });
+    updateListingField("size_chart", newChart);
+  }
+  function toggleDescriptionRecording() {
+    if (isRecordingDescription) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      setIsRecordingDescription(false);
+      return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Speech recognition is not supported in this browser. Please type your description manually.");
+      return;
+    }
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.lang = language === "hi" ? "hi-IN" : "en-IN";
+      recognition.interimResults = false;
+      recognition.onstart = () => {
+        setIsRecordingDescription(true);
+      };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setDescription((prev) => {
+          const next = prev ? prev + " " + transcript : transcript;
+          updateListingField("description", next);
+          const lines = next.split("\n").filter((l) => l.trim().length > 0);
+          updateListingField("bullets", lines);
+          return next;
+        });
+      };
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event);
+        setIsRecordingDescription(false);
+      };
+      recognition.onend = () => {
+        setIsRecordingDescription(false);
+      };
+      recognition.start();
+      recognitionRef.current = recognition;
+    } catch (e) {
+      console.error("Failed to start speech recognition:", e);
+      setIsRecordingDescription(false);
+    }
+  }
+  return <div className="pb-32">
+      <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-md">
+        <Link to="/listing" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card" aria-label="Go back">
+          <ChevronLeft className="h-5 w-5" />
+        </Link>
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">{t("previewTitle")}</p>
+        <div className="w-10" />
+      </div>
+
+
+
+      <div className="relative">
+        <img src={imageSrc} alt={productName || "Product"} className="h-96 w-full object-cover object-top" width={800} height={800} loading="lazy" />
+      </div>
+
+      {
+    /* Interactive & Editable Attributes Grid Section */
+  }
+      <div className="px-5 pt-5 space-y-4">
+        {
+    /* Product Name (Full Width) */
+  }
+        <div>
+          <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+            Product Name / SEO Title
+          </label>
+          <input
+    ref={titleInputRef}
+    type="text"
+    value={productName}
+    onChange={(e) => {
+      setProductName(e.target.value);
+      updateListingField("title", e.target.value);
+    }}
+    placeholder="e.g. Pink Banarasi Silk Saree"
+    className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold focus:border-primary focus:outline-none"
+  />
+        </div>
+
+        {
+    /* Price & Status Row */
+  }
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+              Price (₹)
+            </label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-muted-foreground">₹</span>
+              <input
+    type="number"
+    value={price}
+    onChange={(e) => {
+      const val = Number(e.target.value) || 0;
+      setPrice(val);
+      updateListingField("price", val);
+    }}
+    className="w-full rounded-xl border border-border bg-card pl-7 pr-4 py-2.5 text-sm font-bold focus:border-primary focus:outline-none"
+  />
+            </div>
+          </div>
+          <div className="flex flex-col justify-end">
+            <div className="flex items-center gap-1 rounded-xl bg-[oklch(0.55_0.14_145)]/10 border border-[oklch(0.55_0.14_145)]/20 px-3 py-2.5 justify-center h-[42px]">
+              <Star className="h-4 w-4 fill-[oklch(0.5_0.14_145)] text-[oklch(0.5_0.14_145)]" />
+              <span className="text-xs font-bold text-[oklch(0.5_0.14_145)]">New Listing</span>
+            </div>
+          </div>
+        </div>
+
+        {
+    /* Product Attributes Header */
+  }
+        <div className="flex items-center justify-between pt-2 border-t border-border/40">
+          <h3 className="font-display font-bold text-foreground">Product Attributes</h3>
+          <button
+    type="button"
+    onClick={() => setDetailsExpanded(!detailsExpanded)}
+    className="text-xs font-semibold text-primary hover:underline flex items-center gap-0.5"
+  >
+            {detailsExpanded ? "Hide details" : "Show details"}
+          </button>
+        </div>
+
+        {
+    /* Collapsible Attributes Container */
+  }
+        <AnimatePresence initial={false}>
+          {detailsExpanded && <motion.div
+    initial={{ height: 0, opacity: 0 }}
+    animate={{ height: "auto", opacity: 1 }}
+    exit={{ height: 0, opacity: 0 }}
+    transition={{ duration: 0.25 }}
+    className="overflow-hidden space-y-4"
+  >
+              {
+    /* Material & Colour Grid */
+  }
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+                    Material / Fabric
+                  </label>
+                  <input
+    type="text"
+    value={material}
+    onChange={(e) => {
+      setMaterial(e.target.value);
+      updateListingField("material", e.target.value);
+    }}
+    placeholder="e.g. Pure Cotton"
+    className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
+  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+                    Colour / Pattern
+                  </label>
+                  <input
+    type="text"
+    value={colour}
+    onChange={(e) => {
+      setColour(e.target.value);
+      updateListingField("colour", e.target.value);
+    }}
+    placeholder="e.g. Indigo Blue Floral"
+    className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
+  />
+                </div>
+              </div>
+
+              {
+    /* Occasion & Sleeve (Apparel Only) Grid */
+  }
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+                    Occasion
+                  </label>
+                  <input
+    type="text"
+    value={occasion}
+    onChange={(e) => {
+      setOccasion(e.target.value);
+      updateListingField("occasion", e.target.value);
+    }}
+    placeholder="e.g. Wedding / Festive"
+    className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
+  />
+                </div>
+                {isApparel && <div>
+                    <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+                      Sleeve
+                    </label>
+                    <input
+    type="text"
+    value={sleeve}
+    onChange={(e) => {
+      setSleeve(e.target.value);
+      updateListingField("sleeve", e.target.value);
+    }}
+    placeholder="e.g. Full Sleeve"
+    className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm focus:border-primary focus:outline-none"
+  />
+                  </div>}
+              </div>
+
+              {
+    /* Sizes Multi-Select */
+  }
+              <div>
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+                  Sizes Available
+                </label>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {["Free", "S", "M", "L", "XL", "XXL"].map((sz) => {
+    const isSelected = selectedSizes.includes(sz);
+    return <button
+      key={sz}
+      type="button"
+      onClick={() => toggleSizeSelection(sz)}
+      className={cn(
+        "rounded-xl border px-4 py-2 text-xs font-semibold btn-lift transition-all",
+        isSelected ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-border bg-card text-muted-foreground"
+      )}
+    >
+                        {sz}
+                      </button>;
+  })}
+                </div>
+              </div>
+            </motion.div>}
+        </AnimatePresence>
+
+        {
+    /* Divider motif */
+  }
+        <KantriMotifDivider />
+
+        {
+    /* Description Textarea with Integrated Mic Button */
+  }
+        <div>
+          <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">
+            Description
+          </label>
+          <div className="relative">
+            <textarea
+    value={description}
+    onChange={(e) => {
+      setDescription(e.target.value);
+      updateListingField("description", e.target.value);
+      const lines = e.target.value.split("\n").filter((l) => l.trim().length > 0);
+      updateListingField("bullets", lines);
+    }}
+    placeholder="Tell buyers what makes it special..."
+    rows={5}
+    className="w-full rounded-xl border border-border bg-card pl-4 pr-12 py-3 text-sm leading-relaxed focus:border-primary focus:outline-none"
+  />
+            {
+    /* Corner circular mic button */
+  }
+            <motion.button
+    type="button"
+    whileTap={{ scale: 0.9 }}
+    onClick={toggleDescriptionRecording}
+    className={cn(
+      "absolute right-3 bottom-4 grid h-9 w-9 place-items-center rounded-full text-white shadow-md btn-lift",
+      isRecordingDescription ? "bg-destructive ring-4 ring-destructive/30 animate-pulse" : "bg-primary hover:bg-primary-hover"
+    )}
+    aria-label={isRecordingDescription ? "Stop description recording" : "Record description speech"}
+  >
+              {isRecordingDescription ? <span className="h-3 w-3 rounded-full bg-white animate-ping" /> : <Mic className="h-4 w-4" />}
+            </motion.button>
+          </div>
+        </div>
+
+        {
+    /* Multi-Location Delivery Risk Summary Card */
+  }
+        {currentListing?.deliveryRisks && currentListing.deliveryRisks.length > 0 ? (() => {
+    const risks = currentListing.deliveryRisks;
+    const highRiskCount = risks.filter((r) => r.risk_level.toLowerCase() === "high").length;
+    const totalCount = risks.length;
+    return <div className="mt-5 rounded-2xl border border-border bg-card p-4 space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10">
+                  <ShieldAlert className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-display font-semibold text-foreground">Smart COD Rule</h4>
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                    {highRiskCount > 0 ? <span>
+                        <strong>{highRiskCount} of your {totalCount}</strong> delivery zones are high-risk — here's our recommendation.
+                      </span> : <span>
+                        All {totalCount} checked delivery zones are low/medium risk. Normal settings apply.
+                      </span>}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-border/40">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground">Switch to prepaid above ₹700</p>
+                  <p className="text-xs text-muted-foreground">Automatically disables Cash on Delivery (COD) for higher-value orders.</p>
+                </div>
+                <button
+      type="button"
+      onClick={() => setEnforcePrepaid(!enforcePrepaid)}
+      className="text-primary hover:text-primary-hover focus:outline-none shrink-0"
+    >
+                  {enforcePrepaid ? <ToggleRight className="h-9 w-9 text-primary" /> : <ToggleLeft className="h-9 w-9 text-muted-foreground" />}
+                </button>
+              </div>
+            </div>;
+  })() : <div className="mt-5 space-y-2 rounded-2xl border border-border bg-card p-4">
+            <Row icon={<Truck className="h-4 w-4 text-secondary" />} label={t("deliveryBy")} />
+            <Row icon={<ShieldCheck className="h-4 w-4 text-[oklch(0.55_0.14_145)]" />} label={t("codBadge")} />
+          </div>}
+      </div>
+
+      {
+    /* Return Risk Evaluation summary card */
+  }
+      <div className="mt-6 px-5">
+        <Card className="bg-gradient-to-br from-[oklch(0.97_0.03_140)] to-card">
+          <div className="flex items-center gap-4">
+            <Gauge value={riskScore} label="Return Risk" />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[oklch(0.5_0.14_145)]">
+                {riskScore < 25 ? t("lowRisk") : riskScore < 50 ? "Medium risk" : "High risk"}
+              </p>
+              <h3 className="font-display text-lg font-semibold">Your listing is {readiness}% ready</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {issues.length > 0 ? `${issues.length} gap${issues.length > 1 ? "s" : ""} to address before publishing.` : "Looking marketplace-ready!"}
+              </p>
+            </div>
+          </div>
+
+          {issues.length > 0 && <ul className="mt-4 space-y-2">
+              {issues.map((issue, i) => <motion.li
+    key={`${issue.issue}-${i}`}
+    initial={{ opacity: 0, x: -8 }}
+    animate={{ opacity: 1, x: 0 }}
+    className="flex items-center justify-between gap-3 rounded-xl bg-card px-3 py-2.5 text-sm"
+  >
+                  <div className="min-w-0 flex-1">
+                    <span className="font-medium">{issue.explanation || issue.issue || "Listing gap"}</span>
+                    {issue.contribution_pct != null && issue.contribution_pct > 0 && <span className="ml-1 text-xs text-muted-foreground">(+{issue.contribution_pct}% risk)</span>}
+                  </div>
+                  <button
+    type="button"
+    onClick={() => handleFixIssue(i)}
+    className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary btn-lift"
+  >
+                    <Wrench className="h-3 w-3" /> Fix this
+                  </button>
+                </motion.li>)}
+            </ul>}
+        </Card>
+      </div>
+
+      <div className="mt-8 flex gap-3 px-5">
+        <GhostButton onClick={handleEditClick} className="flex-1">
+          <Pencil className="h-4 w-4" /> {t("editListing")}
+        </GhostButton>
+        <PrimaryButton
+    onClick={() => setShowPushDrawer(true)}
+    className="flex-1"
+  >
+          <Send className="h-5 w-5" /> {t("publishStore").replace("to Store", "")}
+        </PrimaryButton>
+      </div>
+
+      {
+    /* Multi-Channel Push Drawer */
+  }
+      <AnimatePresence>
+        {showPushDrawer && <>
+            <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    onClick={() => setShowPushDrawer(false)}
+    className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+  />
+            <motion.div
+    initial={{ y: "100%" }}
+    animate={{ y: 0 }}
+    exit={{ y: "100%" }}
+    transition={{ type: "spring", damping: 25, stiffness: 200 }}
+    className="fixed bottom-0 left-0 right-0 z-50 rounded-t-[32px] border-t border-border bg-card p-6 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] shadow-2xl md:max-w-[440px] md:mx-auto md:left-1/2 md:-translate-x-1/2"
+  >
+              <div className="mx-auto mb-6 h-1.5 w-12 rounded-full bg-border" />
+              <h3 className="font-display text-xl font-bold text-foreground">Distribute Listing</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Select the channels where you want to push this listing.</p>
+              
+              <div className="mt-6 space-y-3">
+                {channels.map((channel) => <label key={channel.id} className="flex items-center justify-between rounded-2xl border border-border bg-background p-4 cursor-pointer hover:bg-accent/5 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-muted text-xl">
+                        {channel.icon}
+                      </div>
+                      <span className="font-semibold text-foreground">{channel.label}</span>
+                    </div>
+                    <div className="relative inline-flex items-center cursor-pointer">
+                      <input
+    type="checkbox"
+    className="sr-only peer"
+    checked={selectedChannels[channel.id]}
+    onChange={(e) => setSelectedChannels((prev) => ({ ...prev, [channel.id]: e.target.checked }))}
+  />
+                      <div className="w-11 h-6 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary" />
+                    </div>
+                  </label>)}
+              </div>
+
+              <div className="mt-8">
+                <PrimaryButton
+    onClick={() => {
+      if (currentListing) {
+        const newListing = {
+          id: `listing_${Date.now()}`,
+          title: productName,
+          price,
+          category: currentListing.declared_category || "kurti",
+          material,
+          colour,
+          sleeve,
+          occasion,
+          available_sizes: selectedSizes,
+          description,
+          uploadedImageUrl: imageSrc,
+          risk_score: currentListing.risk_score || 0,
+          issues_found: currentListing.issues_found || [],
+          channels: Object.keys(selectedChannels).filter((k) => selectedChannels[k])
+        };
+        addPublishedListing(newListing);
+        setPublishedListing(newListing);
+        navigate("/publish-success");
+      }
+    }}
+    className="w-full"
+  >
+                  <Send className="h-5 w-5" /> Push to Channels
+                </PrimaryButton>
+              </div>
+            </motion.div>
+          </>}
+      </AnimatePresence>
+    </div>;
+}
+function Row({ icon, label }) {
+  return <div className="flex items-center gap-2 text-sm">
+      {icon}
+      <span className="text-foreground/80">{label}</span>
+    </div>;
+}

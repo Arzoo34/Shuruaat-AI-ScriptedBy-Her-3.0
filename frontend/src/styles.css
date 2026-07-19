@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-background: #FFF8F2;
+  --color-foreground: #2d2621;
+  --color-primary: #e07a5f;
+  --color-primary-foreground: #ffffff;
+  --color-muted: #f4eae1;
+  --color-muted-foreground: #7d726a;
+  --color-accent: #f2cc8f;
+  --color-accent-foreground: #2d2621;
+  --color-border: #e6d7cc;
+  --color-card: #ffffff;
+  --color-card-foreground: #2d2621;
+  --color-destructive: #e76f51;
+  --color-secondary: #3d5a80;
+  
+  --font-sans: "Poppins", "Hind", "Noto Sans Devanagari", sans-serif;
+  --font-display: "Poppins", sans-serif;
+}
+
+.bg-block-print {
+  background-color: #FFF8F2;
+  background-image: radial-gradient(#e07a5f 0.5px, transparent 0.5px), radial-gradient(#e07a5f 0.5px, #FFF8F2 0.5px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+.card-warm {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 0 4px 20px -2px rgba(224, 122, 95, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-lift:hover {
+  transform: translateY(-1px);
+}
+.btn-lift:active {
+  transform: translateY(1px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  color: var(--color-foreground);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.chip:hover {
+  background-color: var(--color-muted);
+}
+.chip-active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+}
+.chip-active:hover {
+  background-color: var(--color-primary);
+}
+
+.divider-rangoli {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+}
+.divider-rangoli::before {
+  content: "💮 ✦ 💮 ✦ 💮";
+  color: var(--color-primary);
+  font-size: 10px;
+  letter-spacing: 0.5rem;
+  opacity: 0.3;
+}
+
+.indian-border-minimal-top {
+  height: 6px;
+  background: 
+    linear-gradient(135deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color-primary) 25%, transparent 25%);
+  background-position: -4px 0, -4px 0, 0 0, 0 0;
+  background-size: 8px 8px;
+  background-color: var(--color-accent);
+  border-bottom: 1px solid var(--color-primary);
+  opacity: 0.95;
+}
+
+.indian-border-minimal-bottom {
+  height: 6px;
+  background: 
+    linear-gradient(135deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color-primary) 25%, transparent 25%);
+  background-position: -4px 0, -4px 0, 0 0, 0 0;
+  background-size: 8px 8px;
+  background-color: var(--color-accent);
+  border-top: 1px solid var(--color-primary);
+  opacity: 0.95;
+}
+
+.indian-border-minimal-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: 
+    linear-gradient(135deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color-primary) 25%, transparent 25%);
+  background-position: 0 -4px, 0 -4px, 0 0, 0 0;
+  background-size: 8px 8px;
+  background-color: var(--color-accent);
+  border-right: 1px solid var(--color-primary);
+  opacity: 0.95;
+}
+
+.indian-border-minimal-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: 
+    linear-gradient(135deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-primary) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color-primary) 25%, transparent 25%);
+  background-position: 0 -4px, 0 -4px, 0 0, 0 0;
+  background-size: 8px 8px;
+  background-color: var(--color-accent);
+  border-left: 1px solid var(--color-primary);
+  opacity: 0.95;
+}

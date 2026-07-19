@@ -1,0 +1,121 @@
+{
+  "kurti": {
+    "title": "Classic Cotton A-Line Kurti with Floral Prints",
+    "bullets": [
+      "Made from 100% premium soft cotton fabric for all-day comfort and breathability.",
+      "Elegant floral pattern with traditional prints, suitable for casual and office wear.",
+      "Features a refined round neck, three-quarter sleeves, and A-line silhouette.",
+      "Easy home wash; colors are guaranteed fast and fade-resistant.",
+      "Perfect pairing with leggings, palazzos, or jeans for a complete look."
+    ],
+    "size_chart": {
+      "S": "Bust: 36 in, Waist: 32 in, Length: 44 in",
+      "M": "Bust: 38 in, Waist: 34 in, Length: 44 in",
+      "L": "Bust: 40 in, Waist: 36 in, Length: 44 in",
+      "XL": "Bust: 42 in, Waist: 38 in, Length: 45 in",
+      "XXL": "Bust: 44 in, Waist: 40 in, Length: 45 in"
+    },
+    "price": 799,
+    "keywords": [
+      "cotton kurti",
+      "floral printed kurti",
+      "A-line kurti",
+      "women ethnic wear",
+      "casual kurti",
+      "office wear kurti"
+    ]
+  },
+  "saree": {
+    "title": "Elegant Banarasi Art Silk Saree with Woven Zari Border",
+    "bullets": [
+      "Crafted from high-quality art silk fabric providing a luxurious drape and elegant sheen.",
+      "Features an intricate golden woven zari design across the body and heavy designer pallu.",
+      "Comes with an unstitched blouse piece matching the saree's border work.",
+      "Saree Length: 5.5 meters, Blouse Length: 0.8 meters.",
+      "Dry clean recommended to maintain texture, color vibrancy, and zari threadwork."
+    ],
+    "size_chart": {
+      "Free Size": "Saree length: 5.5m, Blouse length: 0.8m, Width: 1.1m"
+    },
+    "price": 1499,
+    "keywords": [
+      "banarasi silk saree",
+      "art silk saree",
+      "zari work saree",
+      "festive saree",
+      "saree with blouse piece",
+      "wedding wear saree"
+    ]
+  },
+  "footwear": {
+    "title": "Comfort Walk Women's Cushioned Flat Sandals",
+    "bullets": [
+      "Padded footbed offers superior cushioning and arch support for active walking.",
+      "Made of premium synthetic leather upper that is skin-friendly and durable.",
+      "Anti-slip TPR rubber outsole ensures stable grip on wet and dry surfaces.",
+      "Slip-on style with elastic strap for a secure and customized fit.",
+      "Ideal for daily commutes, casual outings, and pairing with ethnic or western outfits."
+    ],
+    "size_chart": {
+      "UK 4": "Insole Length: 23.3 cm",
+      "UK 5": "Insole Length: 24.1 cm",
+      "UK 6": "Insole Length: 24.8 cm",
+      "UK 7": "Insole Length: 25.6 cm",
+      "UK 8": "Insole Length: 26.4 cm"
+    },
+    "price": 599,
+    "keywords": [
+      "flat sandals",
+      "cushioned footwear",
+      "women daily sandals",
+      "slip-on flats",
+      "comfort sandals",
+      "ethnic flats"
+    ]
+  },
+  "jewelry": {
+    "title": "Traditional Gold-Plated Kundan Necklace Set with Earrings",
+    "bullets": [
+      "Exquisite kundan work accented with artificial gemstones and pearl drops.",
+      "Gold-plated alloy metal base crafted with classic Indian heritage motifs.",
+      "Necklace features an adjustable thread/drawstring closure for a perfect neck fit.",
+      "Matching pair of dangling drop earrings included with secure push-back clasps.",
+      "Avoid direct contact with perfumes, water, and spray to maintain plating shine."
+    ],
+    "size_chart": {
+      "Necklace": "Adjustable drop length, Width: 3.5 cm",
+      "Earrings": "Length: 5 cm, Width: 2 cm"
+    },
+    "price": 1299,
+    "keywords": [
+      "kundan necklace set",
+      "gold plated jewelry",
+      "traditional bridal set",
+      "choker necklace",
+      "ethnic jewelry set",
+      "kundan earrings"
+    ]
+  },
+  "home_decor": {
+    "title": "Handcrafted Ceramic Flower Vase for Living Room Decor",
+    "bullets": [
+      "Handmade by Indian artisans using high-temperature fired clay for longevity.",
+      "Features a modern minimalist design with a neutral matte textured finish.",
+      "Perfect size for holding fresh blooms, dried pampas grass, or artificial flowers.",
+      "Heavy and stable base prevents tipping on tables, shelves, or countertops.",
+      "Gently wipe with a damp cloth to clean; do not use abrasive sponges."
+    ],
+    "size_chart": {
+      "Standard": "Height: 10 in, Width: 4.5 in, Base Diameter: 3.5 in, Weight: 850 grams"
+    },
+    "price": 699,
+    "keywords": [
+      "ceramic flower vase",
+      "minimalist home decor",
+      "handcrafted vase",
+      "living room decorative vase",
+      "table centerpiece",
+      "flower pot"
+    ]
+  }
+}

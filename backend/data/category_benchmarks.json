@@ -1,0 +1,210 @@
+{
+  "kurti": [
+    {
+      "issue": "size_chart_missing_or_inaccurate",
+      "severity": "high",
+      "contribution_pct": 42,
+      "explanation": "82% of returns in this category cite sizing issues due to mismatch between listing dimensions and actual garment."
+    },
+    {
+      "issue": "color_variation_from_image",
+      "severity": "medium",
+      "contribution_pct": 23,
+      "explanation": "Studio lighting and camera filters often cause high-saturation differences, prompting shade mismatch complaints."
+    },
+    {
+      "issue": "fabric_quality_disappointment",
+      "severity": "medium",
+      "contribution_pct": 18,
+      "explanation": "Blends described as 'pure cotton' feel rough or synthetic to buyers, leading to texture-based returns."
+    },
+    {
+      "issue": "poor_stitching_or_hem_finish",
+      "severity": "low",
+      "contribution_pct": 10,
+      "explanation": "Loose threads, uneven seams, or unhemmed linings cause complaints of cheap manufacturing."
+    }
+  ],
+  "saree": [
+    {
+      "issue": "material_stiffness_or_roughness",
+      "severity": "high",
+      "contribution_pct": 36,
+      "explanation": "Inexpensive art silk or synthetic sarees are often stiff and uncomfortable to drape compared to product images."
+    },
+    {
+      "issue": "color_shade_discrepancy",
+      "severity": "medium",
+      "contribution_pct": 28,
+      "explanation": "Particularly visible on metallic gold/silver borders (zari) which look cheap or different in hand than in images."
+    },
+    {
+      "issue": "missing_or_insufficient_blouse_piece",
+      "severity": "high",
+      "contribution_pct": 18,
+      "explanation": "Customers complain when the blouse piece is either not included, unseparated, or too small (less than 80cm)."
+    },
+    {
+      "issue": "poor_border_embroidery_finishing",
+      "severity": "low",
+      "contribution_pct": 11,
+      "explanation": "Sequins or mirror work peeling off during unboxing or initial drape trials."
+    }
+  ],
+  "footwear": [
+    {
+      "issue": "narrow_fit_at_toe_box",
+      "severity": "high",
+      "contribution_pct": 46,
+      "explanation": "Indian feet tend to be wider, and standard European templates lead to immediate pinching/discomfort returns."
+    },
+    {
+      "issue": "poor_cushioning_in_sole",
+      "severity": "medium",
+      "contribution_pct": 22,
+      "explanation": "Flat shoes with zero heel support cause soreness, leading customers to flag them as unwearable."
+    },
+    {
+      "issue": "sole_adhesive_peeling_rapidly",
+      "severity": "high",
+      "contribution_pct": 15,
+      "explanation": "Substandard glue line separation on first wear or during unboxing bend test."
+    },
+    {
+      "issue": "synthetic_odor_out_of_box",
+      "severity": "low",
+      "contribution_pct": 9,
+      "explanation": "Strong chemical or petrol smell from freshly packaged synthetic leather causes negative quality perception."
+    }
+  ],
+  "jewelry": [
+    {
+      "issue": "tarnishing_or_discoloration_on_arrival",
+      "severity": "high",
+      "contribution_pct": 38,
+      "explanation": "Oxidation due to improper sealing/packaging moisture causes gold plating to look black or dull."
+    },
+    {
+      "issue": "broken_clasp_or_faulty_drawstring",
+      "severity": "high",
+      "contribution_pct": 26,
+      "explanation": "Weak solder points on link chains and cheap drawstrings break easily on first adjustment."
+    },
+    {
+      "issue": "weight_or_size_uncomfortable_for_wear",
+      "severity": "medium",
+      "contribution_pct": 18,
+      "explanation": "Heavy bridal sets or large earrings pull down earlobes, making them impractical for prolonged wear."
+    },
+    {
+      "issue": "gemstone_or_pearl_detachment",
+      "severity": "medium",
+      "contribution_pct": 10,
+      "explanation": "Glue failures lead to Kundan or beads dropping off inside the bubble wrap during transit."
+    }
+  ],
+  "home_decor": [
+    {
+      "issue": "transit_damage_or_chipping",
+      "severity": "high",
+      "contribution_pct": 42,
+      "explanation": "Fragile ceramic or glass items packaged without thick thermocol or bubble shells break easily."
+    },
+    {
+      "issue": "dimension_inaccuracy",
+      "severity": "high",
+      "contribution_pct": 24,
+      "explanation": "Vases or planters appearing much smaller in real life than they do in mockup lifestyle listing photos."
+    },
+    {
+      "issue": "color_shade_mismatch",
+      "severity": "medium",
+      "contribution_pct": 16,
+      "explanation": "Matte items looking glossy, or distressed paint finishes looking like defective/dirty spots."
+    },
+    {
+      "issue": "uneven_base_or_tipping_hazard",
+      "severity": "medium",
+      "contribution_pct": 11,
+      "explanation": "Bumpy bottoms on tables or desks cause wobbly surfaces, making them unstable on flat floors."
+    }
+  ],
+  "tshirt": [
+    {
+      "issue": "fabric_shrinkage_after_wash",
+      "severity": "high",
+      "contribution_pct": 35,
+      "explanation": "Cotton t-shirts often shrink significantly on first wash, leading to complaints that the size is too small."
+    },
+    {
+      "issue": "color_fade_or_bleed",
+      "severity": "medium",
+      "contribution_pct": 25,
+      "explanation": "Vibrant dyes on cheap t-shirt prints bleed onto other clothes or fade rapidly after a few washes."
+    },
+    {
+      "issue": "loose_stitching_at_collar",
+      "severity": "low",
+      "contribution_pct": 20,
+      "explanation": "Poor ribbing finish at the neckline causes the collar to stretch out or look wavy ('bacon neck')."
+    },
+    {
+      "issue": "poor_print_durability",
+      "severity": "medium",
+      "contribution_pct": 20,
+      "explanation": "Rubberized chest prints crack or peel off when ironed or tumble-dried."
+    }
+  ],
+  "pants": [
+    {
+      "issue": "waistband_elastic_failure",
+      "severity": "high",
+      "contribution_pct": 38,
+      "explanation": "Weak elastic bands lose their tension quickly, making the pants loose and unwearable."
+    },
+    {
+      "issue": "seam_splitting_at_crotch",
+      "severity": "high",
+      "contribution_pct": 32,
+      "explanation": "Tight templates or double-stitching failures lead to embarrassing fabric splits during active wear."
+    },
+    {
+      "issue": "color_loss_on_friction",
+      "severity": "medium",
+      "contribution_pct": 20,
+      "explanation": "Indigo dyed pants transfer color to light surfaces, leading to stain complaints."
+    },
+    {
+      "issue": "inseam_length_inaccuracy",
+      "severity": "low",
+      "contribution_pct": 10,
+      "explanation": "Pants running either too long or too short for standard Indian height groups."
+    }
+  ],
+  "dress": [
+    {
+      "issue": "fabric_transparency",
+      "severity": "high",
+      "contribution_pct": 40,
+      "explanation": "Thin synthetic fabrics look sheer under sunlight, requiring separate inner linings which buyers complain about."
+    },
+    {
+      "issue": "zipper_jamming_or_splitting",
+      "severity": "high",
+      "contribution_pct": 28,
+      "explanation": "Substandard concealed back zippers jam or break easily on first adjustment."
+    },
+    {
+      "issue": "loose_fitting_at_waist",
+      "severity": "medium",
+      "contribution_pct": 20,
+      "explanation": "Dresses with no waist tie or elastic run baggier than mockups show, prompting size exchanges."
+    },
+    {
+      "issue": "hem_unraveling",
+      "severity": "low",
+      "contribution_pct": 12,
+      "explanation": "Unfinished bottom hems fray after walking or initial draping tests."
+    }
+  ]
+}

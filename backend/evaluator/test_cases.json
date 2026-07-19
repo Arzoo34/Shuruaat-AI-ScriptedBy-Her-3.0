@@ -1,0 +1,120 @@
+[
+  {
+    "id": "TC1",
+    "description": "Voice only, no image, no pincode",
+    "input": {
+      "audio_file": "samples/voice_kurti.wav",
+      "image_files": [],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": null,
+      "input_text": "Premium cotton kurti daily wear."
+    },
+    "expected": {
+      "category_mismatch_flagged": false,
+      "final_listing_not_null": true,
+      "expected_tools": ["transcribe_audio", "generate_listing_content", "score_return_risk"],
+      "min_risk_score": 10,
+      "max_risk_score": 90
+    }
+  },
+  {
+    "id": "TC2",
+    "description": "Image mismatch (declared kurti, photo is saree)",
+    "input": {
+      "audio_file": null,
+      "image_files": ["samples/saree_photo.jpg"],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": null
+    },
+    "expected": {
+      "category_mismatch_flagged": true,
+      "final_listing_null": true,
+      "expected_tools": ["analyze_product_image", "check_category_mismatch"],
+      "disallowed_tools": ["generate_listing_content"]
+    }
+  },
+  {
+    "id": "TC3",
+    "description": "Voice + image + pincode consistent",
+    "input": {
+      "audio_file": "samples/voice_kurti.wav",
+      "image_files": ["samples/kurti_photo.jpg"],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": "110001",
+      "input_text": "Beautiful block print design."
+    },
+    "expected": {
+      "category_mismatch_flagged": false,
+      "final_listing_not_null": true,
+      "expected_tools": ["transcribe_audio", "analyze_product_image", "check_category_mismatch", "generate_listing_content", "score_return_risk", "check_pincode_risk"]
+    }
+  },
+  {
+    "id": "TC4",
+    "description": "Image only, category matches",
+    "input": {
+      "audio_file": null,
+      "image_files": ["samples/kurti_photo.jpg"],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": null,
+      "input_text": "Cotton block print daily wear."
+    },
+    "expected": {
+      "category_mismatch_flagged": false,
+      "final_listing_not_null": true,
+      "expected_tools": ["analyze_product_image", "check_category_mismatch", "generate_listing_content", "score_return_risk"]
+    }
+  },
+  {
+    "id": "TC5",
+    "description": "Missing audio file (simulate file not found)",
+    "input": {
+      "audio_file": "samples/nonexistent_voice.wav",
+      "image_files": [],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": null
+    },
+    "expected": {
+      "category_mismatch_flagged": false,
+      "expected_tools": ["transcribe_audio"],
+      "note": "transcribe_audio handles missing file gracefully"
+    }
+  },
+  {
+    "id": "TC6",
+    "description": "High risk pincode",
+    "input": {
+      "audio_file": null,
+      "image_files": ["samples/kurti_photo.jpg"],
+      "declared_category": "kurti",
+      "target_language": "Hindi",
+      "pincode": "800001",
+      "input_text": "Cotton A-line kurti."
+    },
+    "expected": {
+      "category_mismatch_flagged": false,
+      "expected_pincode_risk": "high",
+      "expected_tools": ["analyze_product_image", "check_category_mismatch", "generate_listing_content", "score_return_risk", "check_pincode_risk"]
+    }
+  },
+  {
+    "id": "TC7",
+    "description": "Fallback scenario (unsupported category)",
+    "input": {
+      "audio_file": null,
+      "image_files": [],
+      "declared_category": "unsupported_gadget",
+      "target_language": "Hindi",
+      "pincode": null
+    },
+    "expected": {
+      "fallback_used": true,
+      "expected_tools": ["generate_listing_content"]
+    }
+  }
+]

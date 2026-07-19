@@ -1,0 +1,44 @@
+{
+  "seller_demo_1": {
+    "seller_name": "Priya",
+    "week_range": "July 7 - July 13, 2026",
+    "return_rate": 18,
+    "return_rate_trend": "down_from_24",
+    "cod_returns": 5,
+    "prepaid_returns": 0,
+    "top_complaint_theme": "Sizing felt smaller than expected",
+    "total_orders": 32,
+    "money_saved_estimate": 600,
+    "recommendation": "5 COD returns, 0 prepaid this week. Switching to prepaid-only above ₹700 could save an estimated ₹600/week.",
+    "recommendation_action": "switch_cod_threshold",
+    "recommendation_action_value": 700
+  },
+  "seller_demo_2": {
+    "seller_name": "Karan",
+    "week_range": "July 7 - July 13, 2026",
+    "return_rate": 22,
+    "return_rate_trend": "up_from_15",
+    "cod_returns": 2,
+    "prepaid_returns": 6,
+    "top_complaint_theme": "Fabric colour bled during first wash",
+    "total_orders": 45,
+    "money_saved_estimate": 1200,
+    "recommendation": "High prepaid returns due to fabric bleeding. Adding a 'Wash Care: Dry Clean Only' warning banner to your Saree description could save an estimated ₹1,200/week in return shipping.",
+    "recommendation_action": "add_wash_care_warning",
+    "recommendation_action_value": 0
+  },
+  "seller_demo_3": {
+    "seller_name": "Aisha",
+    "week_range": "July 7 - July 13, 2026",
+    "return_rate": 3,
+    "return_rate_trend": "down_from_5",
+    "cod_returns": 1,
+    "prepaid_returns": 0,
+    "top_complaint_theme": "None (High satisfaction)",
+    "total_orders": 50,
+    "money_saved_estimate": 0,
+    "recommendation": "Outstanding performance! Your return rate is only 3%. Keep offering your standard size guidelines and maintain prompt COD order confirmation calls.",
+    "recommendation_action": "maintain_best_practices",
+    "recommendation_action_value": 0
+  }
+}

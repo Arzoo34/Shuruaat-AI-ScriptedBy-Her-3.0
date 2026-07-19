@@ -1,0 +1,39 @@
+{
+  "listing_kurti_01": {
+    "individual_replies": [
+      {
+        "question_id": "q4",
+        "question": "Is the color exactly as shown in the picture?",
+        "drafted_reply": "Colors may vary slightly due to screen resolutions and studio photography lighting, but the kurti is indigo blue with traditional floral hand block prints."
+      }
+    ],
+    "pattern_flags": [
+      {
+        "topic": "sizing",
+        "question_count": 3,
+        "suggested_addition": "Available sizes: S, M, L. Please refer to our size chart for detailed measurements.",
+        "field_to_update": "bullets"
+      }
+    ]
+  },
+  "listing_footwear_01": {
+    "individual_replies": [
+      {
+        "question_id": "q9",
+        "question": "Is the sole slip resistant?",
+        "drafted_reply": "Yes, the footwear features an anti-slip TPR rubber outsole which provides a secure grip on both wet and dry surfaces."
+      },
+      {
+        "question_id": "q10",
+        "question": "cushioning walk ke liye soft hai na?",
+        "drafted_reply": "Haan, is flat sandal ka footbed padded hai jo chalte samay extra support aur aaram pradan karta hai."
+      },
+      {
+        "question_id": "q11",
+        "question": "indha sandal size 6 eppo varum?",
+        "drafted_reply": "Currently, size 6 for this sandal is out of stock. We expect it to be restocked within a week. Please check back soon!"
+      }
+    ],
+    "pattern_flags": []
+  }
+}
